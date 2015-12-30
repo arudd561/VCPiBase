@@ -2,15 +2,15 @@
     #!/bin/bash
     #for the Raspberry Pi, we need to insert some sort of FILLER here since it cuts off the first bit of audio
     string=$@
-    lang=”en”
-    if [ “$1” == “-l” ] ; then
-        lang=”$2″
-        string=`echo “$string” | sed -r ‘s/^.{6}//’`
+    lang="en"
+    if [ "$1" == "-l" ] ; then
+        lang="$2"
+        string=`echo "$string" | sed -r ‘s/^.{6}//'`
     fi
     #empty the original file
-    echo “” > “/dev/shm/speak.mp3”
+    echo "" > "/dev/shm/speak.mp3"
     len=${#string}
-    wget -q -U Mozilla -O “/dev/shm/tmp.mp3” “http://api.voicerss.org/?key=7be33ab2b9074ea0bbd2bfdf5337b7b4&src=$string&f=22khz_16bit_mono”
-    cat “/dev/shm/tmp.mp3” >> “/dev/shm/speak.mp3”
+    wget -q -U Mozilla -O "/dev/shm/tmp.mp3" "http://api.voicerss.org/?key=7be33ab2b9074ea0bbd2bfdf5337b7b4&src=$string&f=22khz_16bit_mono"
+    cat "/dev/shm/tmp.mp3" >> "/dev/shm/speak.mp3"
     #now we finally say the whole thing
-    cat “/dev/shm/speak.mp3” | mpg123 – 1>>/dev/shm/voice.log 2>>/dev/shm/voice.log
+    cat "/dev/shm/speak.mp3" | mpg123 – 1>>/dev/shm/voice.log 2>>/dev/shm/voice.log
